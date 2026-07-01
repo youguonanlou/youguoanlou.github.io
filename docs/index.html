@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="郭权的个人学术主页" />
+  <title>郭权 - 学术主页</title>
+  <style>
+    :root {
+      --page-bg: #fafaf9;
+      --ink: #2a2a2a;
+      --heading: #1a1a1a;
+      --body: #3a3a38;
+      --muted: #5a5a58;
+      --light: #6a6a68;
+      --subtle: #7a7a78;
+      --faint: #8a8a88;
+      --footer: #9a9a98;
+      --green: #3d5a4c;
+      --line: #e8e8e6;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 56px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(250, 250, 249, 0.90);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav-inner,
+    .container,
+    .footer-inner {
+      width: min(768px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      color: var(--green);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      white-space: nowrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--green); }
+
+    main.container {
+      padding-top: 80px;
+      padding-bottom: 24px;
+    }
+
+    header.hero { margin-bottom: 80px; }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 16px;
+      color: var(--heading);
+      font-size: 38px;
+      line-height: 1.2;
+      letter-spacing: -.025em;
+      font-weight: 700;
+    }
+
+    .title {
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 17px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .institution {
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .email {
+      margin-bottom: 0;
+      color: var(--subtle);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    section {
+      scroll-margin-top: 80px;
+      margin-bottom: 64px;
+    }
+
+    section:last-child { margin-bottom: 48px; }
+
+    h2 {
+      margin-bottom: 20px;
+      color: var(--heading);
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 600;
+      letter-spacing: .03em;
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .body-copy,
+    .interest-line,
+    .activity {
+      color: var(--body);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .body-copy { margin-bottom: 12px; }
+    .body-copy:last-child { margin-bottom: 0; }
+
+    .interest-line { margin-bottom: 8px; }
+    .interest-line:last-child { margin-bottom: 0; }
+
+    .education-list { display: grid; gap: 20px; }
+    .education-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .education-school {
+      margin-bottom: 2px;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 500;
+    }
+    .education-detail {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .education-period {
+      flex: 0 0 auto;
+      color: var(--faint);
+      font-size: 13px;
+      line-height: 1.55;
+      white-space: nowrap;
+    }
+
+    .paper-list {
+      list-style: none;
+      counter-reset: papers;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 24px;
+    }
+    .paper-list li {
+      counter-increment: papers;
+      position: relative;
+      padding-left: 40px;
+    }
+    .paper-list li::before {
+      content: counter(papers) ".";
+      position: absolute;
+      left: 0;
+      top: 3px;
+      color: var(--faint);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .paper-title {
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+    .paper-authors,
+    .paper-journal {
+      margin-bottom: 2px;
+      color: var(--light);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .paper-journal { margin-bottom: 0; }
+    .paper-note {
+      margin: 6px 0 0;
+      color: var(--faint);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .other-block { margin-bottom: 24px; }
+    .other-block:last-child { margin-bottom: 0; }
+    .other-list { display: grid; gap: 16px; }
+    .other-title {
+      margin-bottom: 2px;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+    .other-meta {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .activity-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 4px;
+    }
+    .activity { margin-bottom: 0; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 32px 0 96px;
+    }
+    .footer-inner { text-align: center; }
+    .footer-inner p {
+      margin: 0;
+      color: var(--footer);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner,
+      .container,
+      .footer-inner { width: min(100% - 32px, 768px); }
+      .site-nav { height: auto; min-height: 52px; }
+      .nav-inner { padding: 14px 0; align-items: flex-start; gap: 12px; }
+      .nav-links { gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+      .nav-links a { font-size: 12px; }
+      main.container { padding-top: 64px; }
+      header.hero { margin-bottom: 64px; }
+      h1 { font-size: 32px; }
+      section { margin-bottom: 56px; }
+      .education-item { flex-direction: column; align-items: flex-start; gap: 2px; }
+      .education-period { white-space: normal; }
+      .paper-list li { padding-left: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="主导航">
+    <div class="nav-inner">
+      <a class="brand" href="#top">郭权</a>
+      <div class="nav-links">
+        <a href="#about">关于我</a>
+        <a href="#education">教育背景</a>
+        <a href="#research">研究兴趣</a>
+        <a href="#papers">代表性论文</a>
+        <a href="#others">其他</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" id="top">
+    <header class="hero">
+      <h1>郭权</h1>
+      <p class="title">财政学博士研究生</p>
+      <p class="institution">对外经济贸易大学国际经济贸易学院</p>
+      <p class="email">邮箱：guoquan@uibe.edu.cn</p>
+    </header>
+
+    <section id="about">
+      <h2>关于我</h2>
+      <p class="body-copy">现为对外经济贸易大学国际经济贸易学院财政学博士研究生。研究主要关注气候变化与环境财税、土地财政、地方政府行为等议题。</p>
+    </section>
+
+    <section id="education">
+      <h2>教育背景</h2>
+      <div class="education-list">
+        <div class="education-item">
+          <div>
+            <p class="education-school">对外经济贸易大学</p>
+            <p class="education-detail">国际经济贸易学院 · 财政学博士研究生</p>
+          </div>
+          <span class="education-period">2025.09—至今</span>
+        </div>
+        <div class="education-item">
+          <div>
+            <p class="education-school">天津财经大学</p>
+            <p class="education-detail">财税与公共管理学院 · 财政学硕士</p>
+          </div>
+          <span class="education-period">2022.09—2025.06</span>
+        </div>
+        <div class="education-item">
+          <div>
+            <p class="education-school">首都经济贸易大学</p>
+            <p class="education-detail">财政税务学院 · 税收学学士</p>
+          </div>
+          <span class="education-period">2018.09—2022.06</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2>研究兴趣</h2>
+      <p class="interest-line">公共财政 · 地方政府行为 · 地方政府债务治理 · 土地财政</p>
+      <p class="interest-line">气候变化与环境财税 · 环境治理与生态补偿</p>
+    </section>
+
+    <section id="papers">
+      <h2>代表性论文</h2>
+      <ol class="paper-list">
+        <li>
+          <p class="paper-title">《流域横向生态补偿机制与绿色发展效率——基于中国9个跨省流域横向生态补偿机制的证据》</p>
+          <p class="paper-authors">陈旭东、郭权、鹿洪源</p>
+          <p class="paper-journal">《当代经济科学》2026年第1期</p>
+        </li>
+        <li>
+          <p class="paper-title">《全链条推进碳中和的绿色税收政策：国际经验与政策建议》</p>
+          <p class="paper-authors">王烨、郭权、鹿洪源、温晓东</p>
+          <p class="paper-journal">《国际税收》2024年第12期</p>
+        </li>
+        <li>
+          <p class="paper-title">《欧盟碳关税对我国的影响和对策》</p>
+          <p class="paper-authors">邓嵩松、鹿洪源、郭权</p>
+          <p class="paper-journal">《税务研究》2023年第12期</p>
+        </li>
+        <li>
+          <p class="paper-title">《以税扩绿：绿色税收促进制造业绿色化转型了吗？》</p>
+          <p class="paper-authors">陈旭东、鹿洪源、郭权</p>
+          <p class="paper-journal">《经济与管理评论》2024年第4期</p>
+          <p class="paper-note">《新华文摘》论点摘编转载；人大复印资料全文转载</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="others">
+      <h2>其他研究与学术活动</h2>
+      <div class="other-block">
+        <h3>其他写作</h3>
+        <div class="other-list">
+          <div>
+            <p class="other-title">《完善绿色税制 引导全过程减碳》</p>
+            <p class="other-meta">《中国税务报》，2023</p>
+          </div>
+          <div>
+            <p class="other-title">《经济转型的税治之路：绿色税收能推动经济绿色低碳发展吗？》</p>
+            <p class="other-meta">《中国税收教育研究（2023—2024）》</p>
+          </div>
+        </div>
+      </div>
+      <div class="other-block">
+        <h3>学术活动</h3>
+        <ul class="activity-list">
+          <li class="activity">香樟经济学术圈推文作者</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 郭权 · 持续更新中</p>
+    </div>
+  </footer>
+</body>
+</html>
